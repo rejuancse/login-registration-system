@@ -1,8 +1,12 @@
 <?php 
-include('layouts/header.php'); 
 include('lib/User.php'); 
+include('layouts/header.php'); 
+Session::checkSession();
+
 $user = new User();
+$userdata = $user->getUserData();
 $loginmsg = Session::get("loginmsg");
+
 ?>
 
 <!-- UserList -->
@@ -44,33 +48,20 @@ $loginmsg = Session::get("loginmsg");
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">001</th>
-                                    <td>Mark Lee</td>
-                                    <td>Otto</td>
-                                    <td>mark@mdo.com</td>
-                                    <td>
-                                        <a class="btn btn-primary" href="profile.php?id=1">View</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                    <td>
-                                        <a class="btn btn-primary" href="profile.php?id=1">View</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                    <td>
-                                        <a class="btn btn-primary" href="profile.php?id=1">View</a>
-                                    </td>
-                                </tr>
+                                <?php if($userdata) { $i = 0; ?>
+                                    <?php foreach($userdata as $data) { $i++; ?>
+                                        <tr>
+                                            <th scope="row"><?php echo $i; ?></th>
+                                            <td><?php echo $data['name']; ?></td>
+                                            <td><?php echo $data['username']; ?></td>
+                                            <td><?php echo $data['email']; ?></td>
+                                            <td>
+                                                <a class="btn btn-primary" href="profile.php?id=<?php echo $data['id']; ?>">View</a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                <?php } ?>
+                               
                             </tbody>
                         </table>
                     </div>

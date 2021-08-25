@@ -2,12 +2,11 @@
 
 class Database {
 
-    private $hostdb = "localhost";
-    private $userdb = "xihad";
-    private $passdb = "rejuancse";
-    private $namedb = "login_register";
+    private $hostdb = "localhost"; # Host name
+    private $userdb = "xihad"; # db username
+    private $passdb = "rejuancse"; # db password
+    private $namedb = "login_register"; # Database name
     public $pdo;
-
 
     public function __construct() {
         if(!isset($this->pdo)) {
